@@ -1,0 +1,27 @@
+{
+  "name": "skinhub",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "14.2.16",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "lucide-react": "^0.300.0",
+    "framer-motion": "^10.16.4",
+    "clsx": "^2.0.0",
+    "tailwind-merge": "^2.0.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
+    "eslint": "latest",
+    "eslint-config-next": "latest"
+  }
+}
