@@ -15,5 +15,13 @@
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
       ]
     }
-  ]
+  ],
+  "experimental": {
+    "services": {
+      "backend": {
+        "entrypoint": "backend",
+        "routePrefix": "/_/backend"
+      }
+    }
+  }
 }

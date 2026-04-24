@@ -4,5 +4,14 @@
     "paths": {
       "@/*": ["./*"]
     }
-  }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.js",
+    "**/*.jsx"
+  ],
+  "exclude": ["node_modules", ".next"]
 }
+
