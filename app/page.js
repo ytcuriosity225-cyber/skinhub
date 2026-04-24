@@ -5,7 +5,7 @@ import Navbar from '@/components/Navbar';
 import ProductCard from '@/components/ProductCard';
 import Filters from '@/components/Filters';
 // Removed local import: import { products } from '@/data/products';
-const API_URL = process.env.NEXT_PUBLIC_API_URL || '/_/backend/api';
+import { API_URL, BACKEND_URL } from '@/lib/config';
 import { ChevronDown, LayoutGrid, SlidersHorizontal, ArrowUpDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect } from 'react';

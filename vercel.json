@@ -16,12 +16,7 @@
       ]
     }
   ],
-  "experimental": {
-    "services": {
-      "backend": {
-        "entrypoint": "backend",
-        "routePrefix": "/_/backend"
-      }
-    }
+  "engines": {
+    "node": "16.x"
   }
 }
