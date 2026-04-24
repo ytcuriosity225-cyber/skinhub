@@ -7,6 +7,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from dotenv import load_dotenv, find_dotenv
 
+# Configure logging early so it is available during module import (e.g. dotenv fallbacks)
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
 try:
     from supabase import create_client, Client
 except Exception:
@@ -36,8 +40,7 @@ else:
         load_dotenv()
         logger.info(f"load_dotenv attempted fallbacks: {tried}")
 
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger("ai_engine")
+# logger already configured at module import
 
 app = FastAPI(title="Azzivone AI Engine")
 
