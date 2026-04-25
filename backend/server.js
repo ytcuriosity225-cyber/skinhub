@@ -7,17 +7,16 @@ const apiRoutes = require('./routes/api');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
+const SERVICE_NAME = process.env.SERVICE_NAME || 'skinhub-backend';
+
+// Configure allowed origins from environment (comma-separated) or allow all by default
+const allowedOrigins = process.env.ALLOWED_ORIGINS
+  ? process.env.ALLOWED_ORIGINS.split(',').map(s => s.trim())
+  : ['*'];
 
 // Middleware
 app.use(cors({
-  origin: [
-    'http://localhost:3000',
-    'http://127.0.0.1:3000',
-    'http://localhost:8000',
-    'http://127.0.0.1:8000',
-    'http://localhost:5000',
-    'http://127.0.0.1:5000'
-  ],
+  origin: allowedOrigins,
   credentials: true
 }));
 app.use(express.json());
@@ -39,4 +38,6 @@ app.use((err, req, res, next) => {
 
 app.listen(PORT, () => {
   console.log(`🚀 Backend Server running on port ${PORT}`);
+  console.log(`ℹ️ Service Name: ${SERVICE_NAME}`);
+  console.log(`ℹ️ CORS allowed origins: ${allowedOrigins.join(',')}`);
 });
