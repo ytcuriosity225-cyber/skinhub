@@ -1,23 +1,20 @@
-FROM python:3.11-slim
+FROM node:18-slim
 
-WORKDIR /app
+# Install system deps and cleanup
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates curl && rm -rf /var/lib/apt/lists/*
 
-# Install minimal build dependencies required by some packages
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential git curl && rm -rf /var/lib/apt/lists/*
+WORKDIR /usr/src/app
 
-# Copy only requirements first (from ai_engine folder) and install
-COPY ai_engine/requirements.txt /app/requirements.txt
-RUN python -m pip install --upgrade pip setuptools wheel
-RUN pip install --no-cache-dir -r /app/requirements.txt
+# Copy backend package files and install dependencies
+COPY backend/package.json backend/package-lock.json* ./
+RUN npm ci --only=production || npm install --only=production
 
-# Copy application source from ai_engine into container
-COPY ai_engine/ /app
+# Copy backend source
+COPY backend/ ./
 
 # Cloud Run expects the container to listen on the port defined by $PORT (default 8080)
 ENV PORT=8080
 EXPOSE 8080
-ENV SERVICE_NAME=skinhub-backend
 
-# Start Uvicorn on port 8080
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
+# Start the Node backend
+CMD ["node", "server.js"]
