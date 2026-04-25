@@ -62,10 +62,7 @@ export default function ProductDetail() {
       </div>
     );
   }
-
-  const relatedProducts = products
-    .filter(p => p.id !== product.id && (p.category === product.category || p.brand === product.brand))
-    .slice(0, 4);
+  
 
   return (
     <div className="min-h-screen bg-white">
