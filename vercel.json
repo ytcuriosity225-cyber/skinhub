@@ -15,8 +15,5 @@
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
       ]
     }
-  ],
-  "engines": {
-    "node": "16.x"
-  }
+  ]
 }
