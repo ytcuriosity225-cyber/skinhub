@@ -6,13 +6,13 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential git curl && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements and install
-COPY requirements.txt /app/requirements.txt
+# Copy only requirements first (from ai_engine folder) and install
+COPY ai_engine/requirements.txt /app/requirements.txt
 RUN python -m pip install --upgrade pip setuptools wheel
 RUN pip install --no-cache-dir -r /app/requirements.txt
 
-# Copy application source
-COPY . /app
+# Copy application source from ai_engine into container
+COPY ai_engine/ /app
 
 # Cloud Run expects the container to listen on the port defined by $PORT (default 8080)
 ENV PORT=8080
