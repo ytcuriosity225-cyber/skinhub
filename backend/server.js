@@ -14,11 +14,15 @@ const allowedOrigins = process.env.ALLOWED_ORIGINS
   ? process.env.ALLOWED_ORIGINS.split(',').map(s => s.trim())
   : ['*'];
 
-// Middleware
-app.use(cors({
-  origin: allowedOrigins,
-  credentials: true
-}));
+// Middleware: allow all origins explicitly when '*' is present, otherwise restrict to the list
+if (allowedOrigins.length === 1 && allowedOrigins[0] === '*') {
+  app.use(cors()); // allow all origins
+} else {
+  app.use(cors({
+    origin: allowedOrigins,
+    credentials: true
+  }));
+}
 app.use(express.json());
 app.use(morgan('dev'));
 
